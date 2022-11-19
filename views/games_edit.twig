@@ -13,11 +13,21 @@
   <form enctype="multipart/form-data" method="POST" class="row g-3">
     <div class="col-6">
       <label class="form-label">Название на английском</label>
-      <input type="text" class="form-control" name="title" />
+      <input
+        type="text"
+        class="form-control"
+        name="title"
+        value="{{ title }}"
+      />
     </div>
     <div class="col-6">
       <label class="form-label">Название на русском</label>
-      <input type="text" class="form-control" name="ruName" />
+      <input
+        type="text"
+        class="form-control"
+        name="ruName"
+        value="{{ ruName }}"
+      />
     </div>
     <div class="col-6">
       <label class="form-label">Тип на русском</label>
@@ -37,7 +47,13 @@
     </div>
     <div class="col-12">
       <label class="form-label">Картинка</label>
-      <input class="form-control" type="file" id="formFile" name="image" />
+      <input
+        class="form-control"
+        type="file"
+        id="formFile"
+        name="image"
+        value="{{ image }}"
+      />
     </div>
     <div class="col-12">
       <textarea
@@ -45,6 +61,7 @@
         placeholder="Полное описание..."
         class="form-control"
         rows="5"
+        value="{{ info }}"
       ></textarea>
     </div>
     <div class="col-12 text-end">

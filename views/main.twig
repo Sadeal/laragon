@@ -1,21 +1,90 @@
 {% extends "__layout.twig" %} {% block content %}
-<div class="container">
+<div
+  class="container d-flex flex-direction-row"
+  style="flex-wrap: wrap; width: max-content"
+>
   {% for object in games %}
-  <ul class="list-group">
-    <li class="nav-item d-flex flex-direction-row p-3 list-group-item">
-      <a class="btn btn-primary" href="/games/{{ object.id }}">
+  <div
+    class="d-flex flex-column"
+    style="
+      width: 250px;
+      height: 250px;
+      margin-right: 50px;
+      margin-bottom: 145px;
+    "
+  >
+    <div
+      class="list-group position-relative"
+      style="
+        outline: 1px solid rgba(100, 100, 100, 0.25);
+        border-radius: 5%;
+        padding: 5px;
+      "
+    >
+      <div class="position-absolute vis d-flex" style="right: 4px; top: 4px">
+        <form action="/games/{{ object.id }}/edit" style="margin-right: 5px">
+          <button type="sumbit" class="btn btn-outline-warning">
+            <i class="fas fa-pen"></i>
+          </button>
+        </form>
+        <form action="/games/{{ object.id }}/delete" method="POST">
+          <button type="sumbit" class="btn btn-danger">
+            <i class="fas fa-times p-1"></i>
+          </button>
+        </form>
+      </div>
+      <img
+        src="{{ object.image }}"
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          width: 250px;
+          margin-top: 10px;
+          border-radius: 25%;
+          margin-bottom: 10px;
+        "
+      />
+      <a
+        class="btn btn-primary"
+        href="/games/{{ object.id }}"
+        style="
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+        "
+      >
         {{ object.ruName }}
       </a>
-
-      <a class="btn btn-link" href="/games/{{ object.id }}?show=image">
-        Картинка
-      </a>
-
-      <a class="btn btn-link" href="/games/{{ object.id }}?show=info">
-        Информация
-      </a>
-    </li>
-  </ul>
+      <div
+        style="
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+        "
+      >
+        <a class="btn btn-link" href="/games/{{ object.id }}?show=image">
+          Картинка
+        </a>
+        <a class="btn btn-link" href="/games/{{ object.id }}?show=info">
+          Информация
+        </a>
+      </div>
+    </div>
+  </div>
   {% endfor %}
 </div>
+
+<style>
+  .vis {
+    opacity: 0;
+  }
+
+  .vis:hover {
+    opacity: 1;
+  }
+</style>
 {% endblock %}

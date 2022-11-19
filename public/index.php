@@ -6,6 +6,8 @@ require_once "../controllers/Controller404.php";
 require_once "../controllers/ObjectController.php";
 require_once "../controllers/SearchController.php";
 require_once "../controllers/GamesCreateController.php";
+require_once "../controllers/GamesEditController.php";
+require_once "../controllers/GamesDeleteController.php";
 require_once "../controllers/TypeCreateController.php";
 
 
@@ -23,6 +25,8 @@ $router->add("/", MainController::class);
 $router->add("/games/(?P<id>\d+)", ObjectController::class);
 $router->add("/search", SearchController::class);
 $router->add("/games/create", GamesCreateController::class);
+$router->add("/games/(?P<id>\d+)/edit", GamesEditController::class);
+$router->add("/games/(?P<id>\d+)/delete", GamesDeleteController::class);
 $router->add("/types/create", TypeCreateController::class);
 
 

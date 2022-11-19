@@ -1,19 +1,29 @@
 <?php
 require_once "BaseGamesTwigController.php";
 
-class GamesCreateController extends BaseGamesTwigController
+class GamesEditController extends BaseGamesTwigController
 {
-	public $template = "games_create.twig";
+	public $template = "games_edit.twig";
 
 
-	public function getContext(): array
+	public function get(array $context)
 	{
 		$context = parent::getContext();
-		$query = $this->pdo->query("SELECT * FROM types");
-		$context['allTypes'] = $query->fetchAll();
-		$context['title'] = "Добавить игру";
 
-		return $context;
+		$id = $this->params['id'];
+
+		$sql = <<<EOL
+SELECT * FROM games WHERE id = :id
+EOL;
+		$query = $this->pdo->prepare($sql);
+		$query->bindValue("id", $id);
+		$query->execute();
+
+		$data = $query->fetchAll();
+
+		$content['object'] = $data;
+
+		$this->get($context);
 	}
 
 	public function post(array $context)
@@ -31,8 +41,8 @@ class GamesCreateController extends BaseGamesTwigController
 
 		// создаем текст запрос
 		$sql = <<<EOL
-INSERT INTO games (title, ruName, image, type, typeRu, info)
-VALUES (:title, :ruName, :image_url, :type, :typeRu, :info)
+UPDATE games
+SET title = :title, ruName = :ruName, image = :image_url, type = :type, typeRu = :typeRu, info = :info
 EOL;
 
 		$query = $this->pdo->prepare($sql);
@@ -46,7 +56,7 @@ EOL;
 
 		$query->execute();
 
-		$context['message'] = 'Вы успешно добавили игру';
+		$context['message'] = 'Вы успешно обновили игру';
 		$context['id'] = $this->pdo->lastInsertId(); // получаем id нового добавленного объекта
 
 		$this->get($context);

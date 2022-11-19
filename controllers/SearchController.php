@@ -33,7 +33,7 @@ EOL;
 		$query->bindValue("typeRu", $typeRu);
 		$query->bindValue("info", $info);
 		$query->execute();
-
+		$context['title'] = "Поиск";
 		$context['objects'] = $query->fetchAll();
 
 		return $context;

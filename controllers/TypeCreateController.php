@@ -7,6 +7,7 @@ class TypeCreateController extends BaseGamesTwigController
 
 	public function get(array $context) // добавили параметр
 	{
+		$context['title'] = "Добавить тип";
 		parent::get($context); // пробросили параметр
 	}
 
