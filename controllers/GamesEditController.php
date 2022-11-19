@@ -1,12 +1,12 @@
 <?php
 require_once "BaseGamesTwigController.php";
 
-class GamesEditController extends BaseGamesTwigController
+class GamesEditController extends BaseController
 {
 	public $template = "games_edit.twig";
 
 
-	public function get(array $context)
+	public function getContext(): array
 	{
 		$context = parent::getContext();
 
@@ -21,9 +21,9 @@ EOL;
 
 		$data = $query->fetchAll();
 
-		$content['object'] = $data;
+		$context['object'] = $data;
 
-		$this->get($context);
+		return $context;
 	}
 
 	public function post(array $context)
