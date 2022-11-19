@@ -1,0 +1,21 @@
+{% extends "__layout.twig" %} {% block content %}
+<div class="container">
+  {% for object in games %}
+  <ul class="list-group">
+    <li class="nav-item d-flex flex-direction-row p-3 list-group-item">
+      <a class="btn btn-primary" href="/games/{{ object.id }}">
+        {{ object.ruName }}
+      </a>
+
+      <a class="btn btn-link" href="/games/{{ object.id }}?show=image">
+        Картинка
+      </a>
+
+      <a class="btn btn-link" href="/games/{{ object.id }}?show=info">
+        Информация
+      </a>
+    </li>
+  </ul>
+  {% endfor %}
+</div>
+{% endblock %}

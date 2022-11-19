@@ -1,0 +1,20 @@
+{% extends "__layout.twig" %}
+
+{% block content %}
+<div class="container">
+    <ul class="list-group">
+        <li class="nav-item d-flex flex-direction-row p-3 list-group-item">
+            <a class="btn {{ template == "image.twig" ? 'btn-primary' : 'btn-link' }}" href="/games/{{ object.id }}?show=image">
+                Картинка
+            </a>
+
+            <a class="btn {{ template == "text.twig" ? 'btn-primary' : 'btn-link'}}" href="/games/{{ object.id }}?show=info">
+                Информация
+            </a>
+        </li>
+    </ul>
+    {% block objectContent %}
+
+    {% endblock %}
+</div>
+{% endblock %}

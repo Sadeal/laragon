@@ -1,0 +1,42 @@
+{% extends "__layout.twig" %} {% block content %}
+<div class="container">
+  <h1>Поиск</h1>
+  <hr />
+  <form class="row g-3" style="margin-bottom: 1.25rem">
+    <div class="col-3">
+      <label class="form-label">Тип </label>
+      <select class="form-control" name="typeRu">
+        <option value="Все">Все</option>
+        <option value="Карточные">Краточные</option>
+        <option value="Настольные">Настольные</option>
+      </select>
+    </div>
+    <div class="col-3">
+      <label class="form-label">Название </label>
+      <input type="text" class="form-control" name="ruName" />
+    </div>
+    <div class="col-3">
+      <label class="form-label">Описание </label>
+      <input type="text" class="form-control" name="info" />
+    </div>
+    <div class="col-3">
+      <button
+        class="form-control btn btn-primary"
+        type="submit"
+        style="margin-top: 32px"
+      >
+        Найти
+      </button>
+    </div>
+  </form>
+  {% for obj in objects %}
+  <ul class="list-group">
+    <li class="nav-item d-flex flex-direction-row p-1 list-group-item">
+      <a class="btn btn-link" href="/games/{{ obj.id }}">
+        {{ obj.ruName }}
+      </a>
+    </li>
+  </ul>
+  {% endfor %}
+</div>
+{% endblock %}
