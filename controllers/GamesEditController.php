@@ -1,7 +1,7 @@
 <?php
 require_once "BaseGamesTwigController.php";
 
-class GamesEditController extends BaseController
+class GamesEditController extends BaseGamesTwigController
 {
 	public $template = "games_edit.twig";
 
@@ -12,22 +12,20 @@ class GamesEditController extends BaseController
 
 		$id = $this->params['id'];
 
-		$sql = <<<EOL
-SELECT * FROM games WHERE id = :id
-EOL;
-		$query = $this->pdo->prepare($sql);
+		$query = $this->pdo->prepare("SELECT * FROM games WHERE id = :id");
 		$query->bindValue("id", $id);
 		$query->execute();
+		$context['editObj'] = $query->fetch();
 
-		$data = $query->fetchAll();
-
-		$context['object'] = $data;
+		$typesQuery = $this->pdo->query("SELECT * FROM types");
+		$context['editType'] = $typesQuery->fetchAll();
 
 		return $context;
 	}
 
 	public function post(array $context)
 	{
+		$id = $this->params['id'];
 		$title = $_POST['title'];
 		$ruName = $_POST['ruName'];
 		$type = $_POST['type'];
@@ -43,6 +41,7 @@ EOL;
 		$sql = <<<EOL
 UPDATE games
 SET title = :title, ruName = :ruName, image = :image_url, type = :type, typeRu = :typeRu, info = :info
+WHERE id = :id
 EOL;
 
 		$query = $this->pdo->prepare($sql);
@@ -53,10 +52,11 @@ EOL;
 		$query->bindValue("image_url", $image_url);
 		$query->bindValue("typeRu", $typeRu);
 		$query->bindValue("info", $info);
+		$query->bindValue("id", $id);
 
 		$query->execute();
 
-		$context['message'] = 'Вы успешно обновили игру';
+		$context['message'] = 'Вы успешно обновили данные о игре';
 		$context['id'] = $this->pdo->lastInsertId(); // получаем id нового добавленного объекта
 
 		$this->get($context);

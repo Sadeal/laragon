@@ -6,8 +6,8 @@ class BaseGamesTwigController extends TwigBaseController
 	{
 		$context = parent::getContext();
 
-		$query1 = $this->pdo->query("SELECT DISTINCT type FROM games ORDER BY 1");
-		$types = $query1->fetchAll();
+		$query = $this->pdo->query("SELECT * FROM types");
+		$types = $query->fetchAll();
 		$context['types'] = $types;
 
 		return $context;

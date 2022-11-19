@@ -18,8 +18,8 @@ class TwigBaseController extends BaseController
     // переопределяем функцию контекста
     public function getContext(): array
     {
-        $query = $this->pdo->query("SELECT type, typeRu, ruName, id FROM games");
         $context = parent::getContext(); // вызываем родительский метод
+        $query = $this->pdo->query("SELECT type, typeRu, ruName, id FROM games");
         $context['title'] = $this->title; // добавляем title в контекст
         $context['template'] = $this->template;
         $context['urlTitle'] = $this->urlTitle;
@@ -29,6 +29,8 @@ class TwigBaseController extends BaseController
         $data = $query->fetchAll();
         $context['game'] = $data;
         $context['games'] = $data;
+        $typesQuery = $this->pdo->query("SELECT * FROM types");
+        $context['types'] = $typesQuery->fetchAll();
 
         return $context;
     }

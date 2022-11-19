@@ -1,12 +1,11 @@
 {% extends "__layout.twig" %} {% block content %}
 <div class="container">
-  <h1>Добавление игры</h1>
+  <h1>Изменение игры {{ editObj.ruName }}</h1>
   <hr />
-
   {% if message %}
   <div class="alert alert-info">
     {{ message }}
-    <a href="/games/{{ id }}">Открыть игру</a>
+    <a href="/games/{{ editObj.id }}">Открыть игру</a>
   </div>
   {% endif %}
 
@@ -17,7 +16,7 @@
         type="text"
         class="form-control"
         name="title"
-        value="{{ title }}"
+        value="{{ editObj.title }}"
       />
     </div>
     <div class="col-6">
@@ -26,13 +25,13 @@
         type="text"
         class="form-control"
         name="ruName"
-        value="{{ ruName }}"
+        value="{{ editObj.ruName }}"
       />
     </div>
     <div class="col-6">
       <label class="form-label">Тип на русском</label>
       <select class="form-control" name="typeRu">
-        {% for type in allTypes %}
+        {% for type in editType %}
         <option value="{{ type.typeRu }}">{{ type.typeRu }}</option>
         {% endfor %}
       </select>
@@ -40,8 +39,8 @@
     <div class="col-6">
       <label class="form-label">Тип на английском</label>
       <select class="form-control" name="type">
-        {% for type1 in allTypes %}
-        <option value="{{ type1.type }}">{{ type1.type }}</option>
+        {% for type in editType %}
+        <option value="{{ type.type }}">{{ type.type }}</option>
         {% endfor %}
       </select>
     </div>
@@ -52,20 +51,20 @@
         type="file"
         id="formFile"
         name="image"
-        value="{{ image }}"
+        value="{{ editObj.image }}"
       />
     </div>
     <div class="col-12">
       <textarea
         name="info"
-        placeholder="Полное описание..."
+        placeholder="{{ editObj.info }}"
         class="form-control"
-        rows="5"
-        value="{{ info }}"
+        rows="10"
+        value="{{ editObj.info }}"
       ></textarea>
     </div>
     <div class="col-12 text-end">
-      <button type="submit" class="btn btn-primary">Добавить</button>
+      <button type="submit" class="btn btn-primary">Сохранить</button>
     </div>
   </form>
 </div>

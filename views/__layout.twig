@@ -48,12 +48,13 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
+            {% for type in types %}
             <li class="nav-item">
-              <a class="nav-link" href="/?type=card"> Карточные </a>
+              <a class="nav-link" href="/?type={{ type.type }}">
+                {{ type.typeRu }}
+              </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/?type=table"> Настольные </a>
-            </li>
+            {% endfor %}
             <li class="nav-item">
               <a class="btn btn-outline-dark" type="submit" href="/search">
                 Поиск
@@ -84,12 +85,13 @@
     </nav>
 
     <div class="collapse" id="navbarToggleExternalContent">
+      {% for type in types %}
       <li class="nav-item">
-        <a class="nav-link" href="/?type=card"> Карточные </a>
+        <a class="nav-link" href="/?type={{ type.type }}">
+          {{ type.typeRu }}
+        </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/?type=table"> Настольные </a>
-      </li>
+      {% endfor %}
       <li class="nav-item">
         <a class="nav-link active" aria-current="page" href="/search">
           Поиск

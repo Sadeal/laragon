@@ -20,6 +20,9 @@ class MainController extends BaseGamesTwigController
 
         // стягиваем данные через fetchAll() и сохраняем результат в контекст
         $context['games'] = $query->fetchAll();
+        $query = $this->pdo->query("SELECT * FROM types");
+
+        $context['types'] = $query->fetchAll();
 
         return $context;
     }
