@@ -37,7 +37,6 @@ class GamesEditController extends BaseGamesTwigController
 		move_uploaded_file($tmp_name, "../public/images/$name");
 		$image_url = "/images/$name";
 
-		// создаем текст запрос
 		$sql = <<<EOL
 UPDATE games
 SET title = :title, ruName = :ruName, image = :image_url, type = :type, typeRu = :typeRu, info = :info
@@ -45,7 +44,6 @@ WHERE id = :id
 EOL;
 
 		$query = $this->pdo->prepare($sql);
-		// привязываем параметры
 		$query->bindValue("title", $title);
 		$query->bindValue("ruName", $ruName);
 		$query->bindValue("type", $type);
@@ -57,7 +55,7 @@ EOL;
 		$query->execute();
 
 		$context['message'] = 'Вы успешно обновили данные о игре';
-		$context['id'] = $this->pdo->lastInsertId(); // получаем id нового добавленного объекта
+		$context['id'] = $this->pdo->lastInsertId();
 
 		$this->get($context);
 	}

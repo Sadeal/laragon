@@ -3,7 +3,7 @@ require_once "BaseGamesTwigController.php";
 
 class ObjectController extends BaseGamesTwigController
 {
-	public $template = "__object.twig"; // указываем шаблон
+	public $template = "__object.twig";
 
 	public function getContext(): array
 	{
@@ -19,12 +19,8 @@ class ObjectController extends BaseGamesTwigController
 			}
 		}
 
-		// готовим запрос к БД, допустим вытащим запись по id=2
-		// тут уже указываю конкретные поля, там более грамотно
-		// стягиваем одну строчку из базы
 		$data = $query->fetch();
 
-		// передаем описание из БД в контекст
 		$context['title'] = $data['ruName'];
 		$context['urlTitle'] = $data['title'];
 		$context['info'] = $data['info'];

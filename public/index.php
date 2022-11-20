@@ -17,7 +17,7 @@ $twig = new \Twig\Environment($loader, [
     "debug" => true
 ]);
 
-$twig->addExtension(new \Twig\Extension\DebugExtension()); // и активируем расширение
+$twig->addExtension(new \Twig\Extension\DebugExtension());
 
 $pdo = new PDO("mysql:host=localhost;dbname=card_games;charset=utf8", "root", "");
 

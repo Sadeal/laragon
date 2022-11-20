@@ -7,8 +7,9 @@
       <label class="form-label">Тип </label>
       <select class="form-control" name="typeRu">
         <option value="Все">Все</option>
-        <option value="Карточные">Краточные</option>
-        <option value="Настольные">Настольные</option>
+        {% for type in types %}
+        <option value="{{ type.typeRu }}">{{ type.typeRu }}</option>
+        {% endfor %}
       </select>
     </div>
     <div class="col-3">

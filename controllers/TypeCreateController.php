@@ -5,10 +5,10 @@ class TypeCreateController extends BaseGamesTwigController
 {
 	public $template = "type_create.twig";
 
-	public function get(array $context) // добавили параметр
+	public function get(array $context)
 	{
 		$context['title'] = "Добавить тип";
-		parent::get($context); // пробросили параметр
+		parent::get($context);
 	}
 
 	public function post(array $context)
@@ -16,15 +16,12 @@ class TypeCreateController extends BaseGamesTwigController
 		$type = $_POST['type'];
 		$typeRu = $_POST['typeRu'];
 
-		// создаем текст запрос
 		$sql = <<<EOL
 INSERT INTO types (type, typeRu)
 VALUES (:type, :typeRu)
 EOL;
 
-		// подготавливаем запрос к БД
 		$query = $this->pdo->prepare($sql);
-		// привязываем параметры
 		$query->bindValue("type", $type);
 		$query->bindValue("typeRu", $typeRu);
 

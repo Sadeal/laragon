@@ -29,14 +29,12 @@ class GamesCreateController extends BaseGamesTwigController
 		move_uploaded_file($tmp_name, "../public/images/$name");
 		$image_url = "/images/$name";
 
-		// создаем текст запрос
 		$sql = <<<EOL
 INSERT INTO games (title, ruName, image, type, typeRu, info)
 VALUES (:title, :ruName, :image_url, :type, :typeRu, :info)
 EOL;
 
 		$query = $this->pdo->prepare($sql);
-		// привязываем параметры
 		$query->bindValue("title", $title);
 		$query->bindValue("ruName", $ruName);
 		$query->bindValue("type", $type);
@@ -47,7 +45,7 @@ EOL;
 		$query->execute();
 
 		$context['message'] = 'Вы успешно добавили игру';
-		$context['id'] = $this->pdo->lastInsertId(); // получаем id нового добавленного объекта
+		$context['id'] = $this->pdo->lastInsertId();
 
 		$this->get($context);
 	}

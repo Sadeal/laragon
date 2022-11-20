@@ -1,26 +1,25 @@
 <?php
-require_once "BaseController.php"; // обязательно импортим BaseController
+require_once "BaseController.php";
 
 class TwigBaseController extends BaseController
 {
-    public $title = ""; // название страницы
-    public $template = ""; // шаблон страницы
+    public $title = "";
+    public $template = "";
     public $urlTitle = "";
     public $image = "";
     public $info = "";
-    protected \Twig\Environment $twig; // ссылка на экземпляр twig, для рендернига
+    protected \Twig\Environment $twig;
 
     public function setTwig($twig)
     {
         $this->twig = $twig;
     }
 
-    // переопределяем функцию контекста
     public function getContext(): array
     {
-        $context = parent::getContext(); // вызываем родительский метод
+        $context = parent::getContext();
         $query = $this->pdo->query("SELECT type, typeRu, ruName, id FROM games");
-        $context['title'] = $this->title; // добавляем title в контекст
+        $context['title'] = $this->title;
         $context['template'] = $this->template;
         $context['urlTitle'] = $this->urlTitle;
         $context['image'] = $this->image;
@@ -35,10 +34,8 @@ class TwigBaseController extends BaseController
         return $context;
     }
 
-    // функция гет, рендерит результат используя $template в качестве шаблона
-    // и вызывает функцию getContext для формирования словаря контекста
     public function get(array $context)
-    { // добавил аргумент в get
-        echo $this->twig->render($this->template, $context); // а тут поменяем getContext на просто $context
+    {
+        echo $this->twig->render($this->template, $context);
     }
 }

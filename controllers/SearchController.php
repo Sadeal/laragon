@@ -36,6 +36,9 @@ EOL;
 		$context['title'] = "Поиск";
 		$context['objects'] = $query->fetchAll();
 
+		$query = $this->pdo->query("SELECT * FROM types");
+		$context['types'] = $query->fetchAll();
+
 		return $context;
 	}
 }

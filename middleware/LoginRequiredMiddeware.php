@@ -8,10 +8,6 @@ class LoginRequiredMiddeware extends BaseMiddleware
 		$sql = <<<EOL
 SELECT login, pass FROM users
 EOL;
-
-
-		$user = '';
-		$password = '';
 		$query = $controller->pdo->query($sql);
 		$context['user'] = $query->fetchAll();
 
@@ -24,7 +20,7 @@ EOL;
 			}
 		}
 		header('WWW-Authenticate: Basic realm="Games"');
-		http_response_code(401); // ну и статус 401 -- Unauthorized, то есть неавторизован
+		http_response_code(401);
 		exit;
 	}
 }

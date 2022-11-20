@@ -32,7 +32,14 @@
       <label class="form-label">Тип на русском</label>
       <select class="form-control" name="typeRu">
         {% for type in editType %}
-        <option value="{{ type.typeRu }}">{{ type.typeRu }}</option>
+        <option
+          value="{{
+            type.typeRu
+          }}"
+          {% if type.typeRu == editObj.typeRu %}selected{% endif %}
+        >
+          {{ type.typeRu }}
+        </option>
         {% endfor %}
       </select>
     </div>
@@ -40,7 +47,9 @@
       <label class="form-label">Тип на английском</label>
       <select class="form-control" name="type">
         {% for type in editType %}
-        <option value="{{ type.type }}">{{ type.type }}</option>
+        <option value="{{ type.type }}"
+        {% if type.type == editObj.type %}selected{% endif %}>
+        {{ type.type }}</option>
         {% endfor %}
       </select>
     </div>
@@ -57,11 +66,11 @@
     <div class="col-12">
       <textarea
         name="info"
-        placeholder="{{ editObj.info }}"
+        placeholder="Основная информация"
         class="form-control"
         rows="10"
-        value="{{ editObj.info }}"
-      ></textarea>
+        >{{ editObj.info }}</textarea
+      >
     </div>
     <div class="col-12 text-end">
       <button type="submit" class="btn btn-primary">Сохранить</button>
