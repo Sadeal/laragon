@@ -1,10 +1,16 @@
 <?php
 
-class LoginRequiredMiddeware extends BaseMiddleware
+class LoginRequiredMiddleware extends BaseMiddleware
 {
 	public function apply(BaseController $controller, array $context)
 	{
-
+		if ($_SESSION['is_logged'] == true)
+			return;
+		else {
+			header('Location: /');
+			exit;
+		}
+		/*
 		$sql = <<<EOL
 SELECT login, pass FROM users
 EOL;
@@ -22,5 +28,6 @@ EOL;
 		header('WWW-Authenticate: Basic realm="Games"');
 		http_response_code(401);
 		exit;
+		*/
 	}
 }
