@@ -22,7 +22,6 @@ $twig = new \Twig\Environment($loader, [
 $twig->addExtension(new \Twig\Extension\DebugExtension());
 
 $pdo = new PDO("mysql:host=localhost;dbname=card_games;charset=utf8", "root", "");
-
 $router = new Router($twig, $pdo);
 $router->add("/login", AuthController::class);
 $router->add("/", MainController::class)

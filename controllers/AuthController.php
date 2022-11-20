@@ -38,7 +38,6 @@ EOL;
 				$_SESSION['is_logged_admin'] = true;
 			}
 			header("Location: /");
-			exit;
 		} else {
 			$context['message'] = 'Неверный логин и/или пароль';
 		}
