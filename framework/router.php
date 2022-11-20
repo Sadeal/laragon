@@ -5,6 +5,13 @@ class Route
 {
 	public string $route_regexp; // тут получается шаблона url
 	public $controller; // а это класс контроллера
+	public array $middlewareList = [];
+
+	public function middleware(BaseMiddleware $m): Route
+	{
+		array_push($this->middlewareList, $m);
+		return $this;
+	}
 
 	// ну и просто конструктор
 	public function __construct($route_regexp, $controller)
@@ -32,10 +39,14 @@ class Router
 	}
 
 	// функция с помощью которой добавляем маршрут
-	public function add($route_regexp, $controller)
+	public function add($route_regexp, $controller): Route
 	{
 		// по сути просто пихает маршрут с привязанным контроллером в $routes
-		array_push($this->routes, new Route("#^$route_regexp$#", $controller));
+		$route = new Route("#^$route_regexp$#", $controller);
+		array_push($this->routes, $route);
+
+		// возвращаем как результат функции
+		return $route;
 	}
 
 	// функция которая должна по url найти маршрут и вызывать его функцию get
@@ -48,16 +59,14 @@ class Router
 
 		// фиксируем в контроллер $default_controller
 		$controller = $default_controller;
+		$newRoute = null;
 
 		$matches = [];
 		// проходим по списку $routes
 		foreach ($this->routes as $route) {
-			// проверяем подходит ли маршрут под шаблон
-
 			if (preg_match($route->route_regexp, $path, $matches)) {
-				// если подходит, то фиксируем привязанные к шаблону контроллер
 				$controller = $route->controller;
-				// и выходим из цикла
+				$newRoute = $route;
 				break;
 			}
 		}
@@ -71,6 +80,12 @@ class Router
 
 		if ($controllerInstance instanceof BaseGamesTwigController) {
 			$controllerInstance->setTwig($this->twig);
+		}
+
+		if ($newRoute) {
+			foreach ($newRoute->middlewareList as $m) {
+				$m->apply($controllerInstance, []);
+			}
 		}
 
 		// вызываем

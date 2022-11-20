@@ -9,6 +9,7 @@ require_once "../controllers/GamesCreateController.php";
 require_once "../controllers/GamesEditController.php";
 require_once "../controllers/GamesDeleteController.php";
 require_once "../controllers/TypeCreateController.php";
+require_once "../middleware/LoginRequiredMiddeware.php";
 
 
 $loader = new \Twig\Loader\FilesystemLoader('../views');
@@ -24,10 +25,15 @@ $router = new Router($twig, $pdo);
 $router->add("/", MainController::class);
 $router->add("/games/(?P<id>\d+)", ObjectController::class);
 $router->add("/search", SearchController::class);
-$router->add("/games/create", GamesCreateController::class);
-$router->add("/games/(?P<id>\d+)/edit", GamesEditController::class);
-$router->add("/games/(?P<id>\d+)/delete", GamesDeleteController::class);
-$router->add("/types/create", TypeCreateController::class);
+
+$router->add("/games/create", GamesCreateController::class)
+    ->middleware(new LoginRequiredMiddeware());
+$router->add("/games/(?P<id>\d+)/edit", GamesEditController::class)
+    ->middleware(new LoginRequiredMiddeware());
+$router->add("/games/(?P<id>\d+)/delete", GamesDeleteController::class)
+    ->middleware(new LoginRequiredMiddeware());
+$router->add("/types/create", TypeCreateController::class)
+    ->middleware(new LoginRequiredMiddeware());
 
 
 $router->get_or_default(Controller404::class);
