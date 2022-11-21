@@ -64,6 +64,7 @@ EOL;
 		} else {
 			$context['message'] = 'Данный пользователь уже существует!';
 		}
+		$context['regData'] = [$login, $pass, $invite];
 		$this->get($context);
 	}
 }

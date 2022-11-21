@@ -30,19 +30,28 @@ EOL;
 		$query->execute();
 
 		$data = $query->fetch();
-		if ($data) {
-			if ($data['type'] == "user") {
-				$_SESSION['is_logged'] = true;
-				$_SESSION['is_logged_admin'] = false;
-			} else {
-				$_SESSION['is_logged'] = true;
-				$_SESSION['is_logged_admin'] = true;
-			}
-			$context['message'] = null;
-			header("Location: /");
+		if ($login == '') {
+			$context['message'] = 'Введите логин!';
 		} else {
-			$context['message'] = 'Неверный логин и/или пароль';
+			if ($pass == '') {
+				$context['message'] = 'Введите пароль!';
+			} else {
+				if ($data) {
+					if ($data['type'] == "user") {
+						$_SESSION['is_logged'] = true;
+						$_SESSION['is_logged_admin'] = false;
+					} else {
+						$_SESSION['is_logged'] = true;
+						$_SESSION['is_logged_admin'] = true;
+					}
+					$context['message'] = null;
+					header("Location: /");
+				} else {
+					$context['message'] = 'Неверный логин и/или пароль';
+				}
+			}
 		}
+		$context['logData'] = $login;
 		$this->get($context);
 	}
 }
