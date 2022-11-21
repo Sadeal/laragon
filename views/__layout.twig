@@ -21,8 +21,11 @@
       crossorigin="anonymous"
     ></script>
   </head>
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <body style="background: #ffffff">
+    <nav
+      class="navbar navbar-expand-lg navbar-light"
+      style="background-color: rgb(0 119 255)"
+    >
       <div class="container">
         <a
           class="navbar-brand"
@@ -35,17 +38,6 @@
             style="width: 40px; min-width: 40px"
           />
         </a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarToggleExternalContent"
-          aria-controls="navbarToggleExternalContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             {% for type in types %}
@@ -62,7 +54,7 @@
             </li>
             <li class="nav-item">
               <a
-                class="btn btn-outline-success"
+                class="btn btn-success"
                 href="/games/create"
                 style="margin-left: 5px"
               >
@@ -71,7 +63,7 @@
             </li>
             <li class="list-unstyled">
               <a
-                class="btn btn-outline-success"
+                class="btn btn-success"
                 aria-current="page"
                 href="/types/create"
                 style="margin-left: 5px"
@@ -81,8 +73,22 @@
             </li>
           </ul>
         </div>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarToggleExternalContent"
+          aria-current="page"
+          aria-controls="navbarToggleExternalContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+          style="justify-content: end; text-align: end; align-items: flex-end"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
         <a
-          class="btn btn-outline-danger"
+          class="btn btn-danger"
           aria-current="page"
           href="/login"
           style="margin-left: 5px; list-style: none"
@@ -91,34 +97,31 @@
         </a>
       </div>
     </nav>
-
     <div
       class="collapse"
       id="navbarToggleExternalContent"
-      style="list-style: none"
+      style="
+        list-style: none;
+        justify-content: end;
+        text-align: end;
+        align-items: flex-end;
+        background: rgb(0 119 255);
+      "
     >
       {% for type in types %}
-      <li class="nav-item">
-        <a class="nav-link" href="/?type={{ type.type }}">
-          {{ type.typeRu }}
-        </a>
-      </li>
+      <a class="btn btn-outline-dark" href="/?type={{ type.type }}">
+        {{ type.typeRu }}
+      </a>
       {% endfor %}
-      <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="/search">
-          Поиск
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="/games/create">
-          Добавить игру
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="/types/create">
-          Добавить тип
-        </a>
-      </li>
+      <a class="btn btn-outline-dark" aria-current="page" href="/search">
+        Поиск
+      </a>
+      <a class="btn btn-outline-dark" aria-current="page" href="/games/create">
+        Добавить игру
+      </a>
+      <a class="btn btn-outline-dark" aria-current="page" href="/types/create">
+        Добавить тип
+      </a>
     </div>
 
     {% block content %} {% endblock %}
