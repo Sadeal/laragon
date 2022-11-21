@@ -30,7 +30,7 @@ class TwigBaseController extends BaseController
         $context['games'] = $data;
         $typesQuery = $this->pdo->query("SELECT * FROM types");
         $context['types'] = $typesQuery->fetchAll();
-
+        $context['is_admin'] = $_SESSION['is_logged_admin'];
         return $context;
     }
 

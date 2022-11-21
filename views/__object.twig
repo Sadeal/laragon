@@ -1,20 +1,22 @@
-{% extends "__layout.twig" %}
+{% extends "__layout.twig" %} {% block content %}
+<div class="container" style="margin-top: 14px">
+  <ul class="list-group">
+    <li class="nav-item d-flex flex-direction-row p-3 list-group-item">
+      <a
+        class="btn {% if is_object == 'image' %} btn-primary {% else %} btn-link {% endif %}"
+        href="/games/{{ object.id }}?show=image"
+      >
+        Картинка
+      </a>
 
-{% block content %}
-<div class="container">
-    <ul class="list-group">
-        <li class="nav-item d-flex flex-direction-row p-3 list-group-item">
-            <a class="btn {{ template == "image.twig" ? 'btn-primary' : 'btn-link' }}" href="/games/{{ object.id }}?show=image">
-                Картинка
-            </a>
-
-            <a class="btn {{ template == "text.twig" ? 'btn-primary' : 'btn-link'}}" href="/games/{{ object.id }}?show=info">
-                Информация
-            </a>
-        </li>
-    </ul>
-    {% block objectContent %}
-
-    {% endblock %}
+      <a
+        class="btn {% if is_object == 'info' %} btn-primary {% else %} btn-link {% endif %}"
+        href="/games/{{ object.id }}?show=info"
+      >
+        Информация
+      </a>
+    </li>
+  </ul>
+  {% block objectContent %} {% endblock %}
 </div>
 {% endblock %}

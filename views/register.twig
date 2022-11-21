@@ -5,7 +5,7 @@
   integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
   crossorigin="anonymous"
 />
-<title>Вход</title>
+<title>Регистрация</title>
 <form class="vh-100 gradient-custom" method="POST">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -13,16 +13,14 @@
         <div class="card bg-primary text-white" style="border-radius: 1rem">
           <div class="card-body p-5 text-center">
             <div class="md-5 mt-md-4 pb-1">
-              <h2 class="fw-bold mb-2 text-uppercase">Вход</h2>
-              <p class="text-white-50 mb-5">
-                Пожалуйста, введите свой логин и пароль!
-              </p>
+              <h2 class="fw-bold mb-2 text-uppercase">Регистрация</h2>
+              <p class="text-white-50 mb-5">Пожалуйста, заполните поля!</p>
               {% if message %}
               <div class="alert alert-danger">
                 {{ message }}
               </div>
               {% endif %}
-              <div class="form-outline form-white mb-4">
+              <div class="form-outline form-white mb-2">
                 <input
                   type="text"
                   class="form-control form-control-lg"
@@ -31,24 +29,39 @@
                 <label class="form-label" for="typeLoginX">Логин</label>
               </div>
 
-              <div class="form-outline form-white mb-4">
+              <div class="form-outline form-white mb-2">
                 <input
-                  type="password"
+                  type="text"
                   name="pass"
                   class="form-control form-control-lg"
                 />
                 <label class="form-label" for="typePasswordX">Пароль</label>
               </div>
 
+              <div class="form-outline form-white mb-2">
+                <input
+                  type="text"
+                  name="invite"
+                  class="form-control form-control-lg"
+                />
+                <label class="form-label" for="typePasswordX">Инвайт код</label>
+                <br />
+                <label
+                  class="form-label"
+                  style="color: rgb(200, 200, 200); font-size: 10px"
+                  >(при наличии)</label
+                >
+              </div>
+
               <button class="btn btn-success btn-lg px-5" type="submit">
-                Войти
+                Зарегистрироваться
               </button>
               <a
-                class="btn btn-outline-light btn-lg px-5 mt-2"
+                class="btn btn-outline-dark btn-lg px-5 mt-2"
                 type="submit"
-                href="/register"
+                href="/login"
               >
-                Зарегистрироваться
+                Попробовать войти
               </a>
             </div>
           </div>

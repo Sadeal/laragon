@@ -9,13 +9,16 @@ class ObjectController extends BaseGamesTwigController
 	{
 		$context = parent::getContext();
 		$query = $this->pdo->query("SELECT * FROM games WHERE id=" . $this->params['id']);
+		$context['is_object'] = '';
 
 		if (isset($_GET['show'])) {
 			if ($_GET['show'] == 'image') {
 				$this->template = "image.twig";
+				$context['is_object'] = 'image';
 			}
 			if ($_GET['show'] == 'info') {
 				$this->template = "info.twig";
+				$context['is_object'] = 'info';
 			}
 		}
 
