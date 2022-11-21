@@ -18,6 +18,8 @@ $loader = new \Twig\Loader\FilesystemLoader('../views');
 $twig = new \Twig\Environment($loader, [
     "debug" => true
 ]);
+session_set_cookie_params(60 * 60 * 10);
+session_start();
 
 $twig->addExtension(new \Twig\Extension\DebugExtension());
 

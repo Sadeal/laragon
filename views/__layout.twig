@@ -69,7 +69,7 @@
                 Добавить игру
               </a>
             </li>
-            <li class="nav-item">
+            <li class="list-unstyled">
               <a
                 class="btn btn-outline-success"
                 aria-current="page"
@@ -81,10 +81,22 @@
             </li>
           </ul>
         </div>
+        <a
+          class="btn btn-outline-danger"
+          aria-current="page"
+          href="/login"
+          style="margin-left: 5px; list-style: none"
+        >
+          Выйти
+        </a>
       </div>
     </nav>
 
-    <div class="collapse" id="navbarToggleExternalContent">
+    <div
+      class="collapse"
+      id="navbarToggleExternalContent"
+      style="list-style: none"
+    >
       {% for type in types %}
       <li class="nav-item">
         <a class="nav-link" href="/?type={{ type.type }}">

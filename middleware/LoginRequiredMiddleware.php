@@ -5,7 +5,6 @@ class LoginRequiredMiddleware extends BaseMiddleware
 	public function apply(BaseController $controller, array $context)
 	{
 		if ($_SESSION['is_logged']) {
-			echo 123;
 			return;
 		} else {
 			header('Location: /login');

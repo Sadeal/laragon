@@ -7,7 +7,7 @@ class LoginRequiredAdminMiddleware extends BaseMiddleware
 		if ($_SESSION['is_logged'] && $_SESSION['is_logged_admin'])
 			return;
 		else
-			header('Location: /');
+			header('Location: /login');
 		exit;
 
 		/*
