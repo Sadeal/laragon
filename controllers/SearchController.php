@@ -35,6 +35,9 @@ EOL;
 		$query->execute();
 		$context['title'] = "Поиск";
 		$context['objects'] = $query->fetchAll();
+		$context['searchTypeRu'] = $typeRu;
+		$context['searchRuName'] = $ruName;
+		$context['searchInfo'] = $info;
 
 		$query = $this->pdo->query("SELECT * FROM types");
 		$context['types'] = $query->fetchAll();

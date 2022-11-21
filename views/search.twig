@@ -8,17 +8,31 @@
       <select class="form-control" name="typeRu">
         <option value="Все">Все</option>
         {% for type in types %}
-        <option value="{{ type.typeRu }}">{{ type.typeRu }}</option>
+        <option
+        {% if searchTypeRu == type.typeRu %}selected{% endif %}
+        >
+          {{ type.typeRu }}
+        </option>
         {% endfor %}
       </select>
     </div>
     <div class="col-3">
       <label class="form-label">Название </label>
-      <input type="text" class="form-control" name="ruName" />
+      <input
+        type="text"
+        class="form-control"
+        name="ruName"
+        value="{{ searchRuName }}"
+      />
     </div>
     <div class="col-3">
       <label class="form-label">Описание </label>
-      <input type="text" class="form-control" name="info" />
+      <input
+        type="text"
+        class="form-control"
+        name="info"
+        value="{{ searchInfo }}"
+      />
     </div>
     <div class="col-3">
       <button

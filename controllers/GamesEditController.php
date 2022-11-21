@@ -34,23 +34,37 @@ class GamesEditController extends BaseGamesTwigController
 
 		$tmp_name = $_FILES['image']['tmp_name'];
 		$name =  $_FILES['image']['name'];
-		move_uploaded_file($tmp_name, "../public/images/$name");
-		$image_url = "/images/$name";
+		if ($name) {
+			move_uploaded_file($tmp_name, "../public/images/$name");
+			$image_url = "/images/$name";
 
-		$sql = <<<EOL
+			$sql = <<<EOL
 UPDATE games
 SET title = :title, ruName = :ruName, image = :image_url, type = :type, typeRu = :typeRu, info = :info
 WHERE id = :id
 EOL;
-
-		$query = $this->pdo->prepare($sql);
-		$query->bindValue("title", $title);
-		$query->bindValue("ruName", $ruName);
-		$query->bindValue("type", $type);
-		$query->bindValue("image_url", $image_url);
-		$query->bindValue("typeRu", $typeRu);
-		$query->bindValue("info", $info);
-		$query->bindValue("id", $id);
+			$query = $this->pdo->prepare($sql);
+			$query->bindValue("title", $title);
+			$query->bindValue("ruName", $ruName);
+			$query->bindValue("type", $type);
+			$query->bindValue("image_url", $image_url);
+			$query->bindValue("typeRu", $typeRu);
+			$query->bindValue("info", $info);
+			$query->bindValue("id", $id);
+		} else {
+			$sql = <<<EOL
+UPDATE games
+SET title = :title, ruName = :ruName, type = :type, typeRu = :typeRu, info = :info
+WHERE id = :id
+EOL;
+			$query = $this->pdo->prepare($sql);
+			$query->bindValue("title", $title);
+			$query->bindValue("ruName", $ruName);
+			$query->bindValue("type", $type);
+			$query->bindValue("typeRu", $typeRu);
+			$query->bindValue("info", $info);
+			$query->bindValue("id", $id);
+		}
 
 		$query->execute();
 
