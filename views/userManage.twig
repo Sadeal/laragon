@@ -1,0 +1,44 @@
+{% extends "__layout.twig" %} {% block content %}
+<div class="container">
+  <h1>Управление пользователями</h1>
+  <hr />
+
+  {% if message %}
+  <div class="alert alert-info">
+    {{ message }}
+    <a href="/users/manage">Обновить список</a>
+  </div>
+  {% endif %}
+
+  <table
+    class="table table-bordered table-striped table-info"
+    style="text-align: center; width:100%"
+  >
+    <thead>
+      <tr>
+        <th style="width:5%" scope="col">id</th>
+        <th scope="col">Логин</th>
+        <th scope="col">Роль</th>
+        <th style="width:15%" scope="col">Изменить роль</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users%}
+      <tr>
+        <th scope="row">{{ user.id }}</th>
+					<form enctype="multipart/form-data" method="POST">
+						<td>{{ user.login }}</td>
+						<input type="hidden" value="{{user.login}}">
+						<td>{{ user.type }}</td>
+						<td>
+            <button type="sumbit" class="btn btn-info">Изменить роль</button>
+						<input name="login" type="hidden" value="{{user.login}}">
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}

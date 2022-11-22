@@ -3,7 +3,7 @@
   class="container d-flex flex-direction-row"
   style="flex-wrap: wrap; width: max-content"
 >
-  {% for object in games %}
+  {% for object in suggestions %}
   <div
     class="d-flex flex-column"
     style="
@@ -24,14 +24,18 @@
     >
       {% if is_admin %}
       <div class="position-absolute vis d-flex" style="right: 4px; top: 4px">
-        <form action="/games/{{ object.id }}/edit" style="margin-right: 5px">
-          <button type="sumbit" class="btn btn-outline-warning">
-            <i class="fas fa-pen"></i>
+        <form method="POST" style="margin-right: 5px">
+          <input name="id" type="hidden" value="{{ object.id }}" />
+          <button type="sumbit" class="btn btn-outline-success">
+            <i class="fas fa-check"></i>
           </button>
         </form>
-        <form action="/games/{{ object.id }}/delete" method="POST">
-          <button type="sumbit" class="btn btn-danger">
-            <i class="fas fa-times p-1"></i>
+        <form
+          action="/games/suggestion/decision/{{ object.id }}/delete"
+          method="POST"
+        >
+          <button type="sumbit" class="btn btn-outline-danger">
+            <i class="fas fa-times" style="width: 15px"></i>
           </button>
         </form>
       </div>
@@ -52,7 +56,7 @@
       />
       <a
         class="btn btn-primary"
-        href="/games/{{ object.id }}"
+        href="#"
         style="
           display: flex;
           justify-content: center;
@@ -62,21 +66,6 @@
       >
         {{ object.ruName }}
       </a>
-      <div
-        style="
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          text-align: center;
-        "
-      >
-        <a class="btn btn-link" href="/games/{{ object.id }}?show=image">
-          Картинка
-        </a>
-        <a class="btn btn-link" href="/games/{{ object.id }}?show=info">
-          Информация
-        </a>
-      </div>
     </div>
   </div>
   {% endfor %}

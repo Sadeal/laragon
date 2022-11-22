@@ -31,6 +31,7 @@ class TwigBaseController extends BaseController
         $typesQuery = $this->pdo->query("SELECT * FROM types");
         $context['types'] = $typesQuery->fetchAll();
         $context['is_admin'] = $_SESSION['is_logged_admin'];
+        $context['is_owner'] = $_SESSION['is_logged_owner'];
         return $context;
     }
 

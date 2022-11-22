@@ -40,9 +40,17 @@ EOL;
 					if ($data['type'] == "user") {
 						$_SESSION['is_logged'] = true;
 						$_SESSION['is_logged_admin'] = false;
+						$_SESSION['is_logged_owner'] = false;
 					} else {
-						$_SESSION['is_logged'] = true;
-						$_SESSION['is_logged_admin'] = true;
+						if ($data['type'] == "admin") {
+							$_SESSION['is_logged'] = true;
+							$_SESSION['is_logged_admin'] = true;
+							$_SESSION['is_logged_owner'] = false;
+						} else {
+							$_SESSION['is_logged'] = true;
+							$_SESSION['is_logged_admin'] = true;
+							$_SESSION['is_logged_owner'] = true;
+						}
 					}
 					$context['message'] = null;
 					header("Location: /");

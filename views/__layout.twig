@@ -45,7 +45,10 @@
         </a>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
-            <div class="dropdown show" style="margin-right: 5px">
+            <div
+              class="dropdown show d-flex flex-row"
+              style="margin-right: 5px"
+            >
               <a
                 class="btn dropdown-toggle"
                 href="#"
@@ -64,6 +67,10 @@
                   {{ type.typeRu }}
                 </a>
                 {% endfor %}
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/games/suggestion">
+                  Предложить
+                </a>
               </div>
             </div>
             {% if is_admin %}
@@ -84,6 +91,14 @@
                   Добавить игру
                 </a>
                 <a class="dropdown-item" href="/types/create"> Добавить тип </a>
+                <a class="dropdown-item" href="/games/suggestion/decision">
+                  Управление заявками
+                </a>
+                {% if is_owner %}
+                <a class="dropdown-item" href="/users/manage">
+                  Управление пользователями
+                </a>
+                {% endif %}
               </div>
             </div>
             {% endif %}
@@ -146,7 +161,18 @@
       <a class="btn btn-outline-dark" aria-current="page" href="/types/create">
         Добавить тип
       </a>
-      {% endif %}
+      <a
+        class="btn btn-outline-dark"
+        aria-current="page"
+        href="/games/suggestion"
+      >
+        Управление заявками
+      </a>
+      {% if is_owner %}
+      <a class="btn btn-outline-dark" aria-current="page" href="/users/manage">
+        Управление пользователями
+      </a>
+      {% endif %} {% endif %}
     </div>
 
     {% block content %} {% endblock %}

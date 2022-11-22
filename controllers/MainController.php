@@ -18,10 +18,12 @@ class MainController extends BaseGamesTwigController
             $query = $this->pdo->query("SELECT * FROM games");
         }
         $context['games'] = $query->fetchAll();
-        $query = $this->pdo->query("SELECT * FROM types");
 
+        $query = $this->pdo->query("SELECT * FROM types");
         $context['types'] = $query->fetchAll();
+
         $context['is_admin'] = $_SESSION['is_logged_admin'];
+        $context['is_owner'] = $_SESSION['is_logged_owner'];
 
         return $context;
     }
