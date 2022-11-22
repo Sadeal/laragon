@@ -1,6 +1,6 @@
 {% extends "__layout.twig" %} {% block content %}
 <div
-  class="container d-flex flex-direction-row"
+  class="container d-flex flex-direction-column"
   style="flex-wrap: wrap; width: max-content"
 >
   {% for object in suggestions %}
@@ -17,7 +17,7 @@
       class="list-group position-relative"
       style="
         outline: 1px solid rgba(100, 100, 100, 0.25);
-        border-radius: 5%;
+        border-radius: 10px;
         padding: 5px;
         margin-top: 15px;
       "
@@ -64,7 +64,46 @@
           text-align: center;
         "
       >
+        Название<br />
+        ru:
         {{ object.ruName }}
+        <br />
+        eng:
+        {{ object.title }}
+      </a>
+      <a
+        class="btn btn-info"
+        href="#"
+        style="
+          margin-top: 10px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          word-wrap: break-word;
+        "
+      >
+        Тип<br />
+        ru:
+        {{ object.typeRu }}
+        <br />
+        eng:
+        {{ object.type }}
+      </a>
+      <a
+        class="btn btn-secondary"
+        href="#"
+        style="
+          margin-top: 10px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          word-wrap: break-word;
+        "
+      >
+        Картинка<br />
+        {{ object.image }}
       </a>
     </div>
   </div>
