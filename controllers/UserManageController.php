@@ -4,6 +4,7 @@ require_once "BaseGamesTwigController.php";
 class UserManageController extends BaseGamesTwigController
 {
 	public $template = "userManage.twig";
+	public $title = "Управление пользователями";
 
 
 	public function getContext(): array

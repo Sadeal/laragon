@@ -116,7 +116,6 @@
           aria-controls="navbarToggleExternalContent"
           aria-expanded="false"
           aria-label="Toggle navigation"
-          style="justify-content: end; text-align: end; align-items: flex-end"
         >
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -152,38 +151,6 @@
         <a class="btn btn-outline-dark mt-1" aria-current="page" href="/search">
           Поиск
         </a>
-        <br />
-        {% if is_admin %}
-        <a
-          class="btn btn-success mt-1"
-          aria-current="page"
-          href="/games/create"
-        >
-          Добавить игру
-        </a>
-        <a
-          class="btn btn-success mt-1"
-          aria-current="page"
-          href="/types/create"
-        >
-          Добавить тип
-        </a>
-        <a
-          class="btn btn-success mt-1"
-          aria-current="page"
-          href="/games/suggestion"
-        >
-          Управление заявками
-        </a>
-        {% if is_owner %}
-        <a
-          class="btn btn-success mt-1"
-          aria-current="page"
-          href="/users/manage"
-        >
-          Управление пользователями
-        </a>
-        {% endif %} {% endif %}
       </div>
     </div>
 
