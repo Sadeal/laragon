@@ -73,35 +73,6 @@
                 </a>
               </div>
             </div>
-            {% if is_admin %}
-            <div class="dropdown show" style="margin-right: 5px">
-              <a
-                class="btn dropdown-toggle btn-success"
-                href="#"
-                role="button"
-                id="dropdownMenuLink"
-                data-bs-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                Админ-панель
-              </a>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="/games/create">
-                  Добавить игру
-                </a>
-                <a class="dropdown-item" href="/types/create"> Добавить тип </a>
-                <a class="dropdown-item" href="/games/suggestion/decision">
-                  Управление заявками
-                </a>
-                {% if is_owner %}
-                <a class="dropdown-item" href="/users/manage">
-                  Управление пользователями
-                </a>
-                {% endif %}
-              </div>
-            </div>
-            {% endif %}
             <li class="nav-item">
               <a class="btn btn-outline-dark" type="submit" href="/search">
                 Поиск
@@ -109,6 +80,33 @@
             </li>
           </ul>
         </div>
+        {% if is_admin %}
+        <div class="dropdown show" style="margin-right: 5px">
+          <a
+            class="btn dropdown-toggle btn-success"
+            href="#"
+            role="button"
+            id="dropdownMenuLink"
+            data-bs-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            Админ-панель
+          </a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="/games/create"> Добавить игру </a>
+            <a class="dropdown-item" href="/types/create"> Добавить тип </a>
+            <a class="dropdown-item" href="/games/suggestion/decision">
+              Управление заявками
+            </a>
+            {% if is_owner %}
+            <a class="dropdown-item" href="/users/manage">
+              Управление пользователями
+            </a>
+            {% endif %}
+          </div>
+        </div>
+        {% endif %}
         <button
           class="navbar-toggler"
           type="button"
@@ -144,35 +142,49 @@
         background: rgb(0 119 255);
       "
     >
-      {% for type in types %}
-      <a class="btn btn-outline-dark" href="/?type={{ type.type }}">
-        {{ type.typeRu }}
-      </a>
-      {% endfor %}
-      <br />
-      <a class="btn btn-outline-dark" aria-current="page" href="/search">
-        Поиск
-      </a>
-      <br />
-      {% if is_admin %}
-      <a class="btn btn-outline-dark" aria-current="page" href="/games/create">
-        Добавить игру
-      </a>
-      <a class="btn btn-outline-dark" aria-current="page" href="/types/create">
-        Добавить тип
-      </a>
-      <a
-        class="btn btn-outline-dark"
-        aria-current="page"
-        href="/games/suggestion"
-      >
-        Управление заявками
-      </a>
-      {% if is_owner %}
-      <a class="btn btn-outline-dark" aria-current="page" href="/users/manage">
-        Управление пользователями
-      </a>
-      {% endif %} {% endif %}
+      <div class="container">
+        {% for type in types %}
+        <a class="btn btn-outline-dark" href="/?type={{ type.type }}">
+          {{ type.typeRu }}
+        </a>
+        {% endfor %}
+        <br />
+        <a class="btn btn-outline-dark mt-1" aria-current="page" href="/search">
+          Поиск
+        </a>
+        <br />
+        {% if is_admin %}
+        <a
+          class="btn btn-success mt-1"
+          aria-current="page"
+          href="/games/create"
+        >
+          Добавить игру
+        </a>
+        <a
+          class="btn btn-success mt-1"
+          aria-current="page"
+          href="/types/create"
+        >
+          Добавить тип
+        </a>
+        <a
+          class="btn btn-success mt-1"
+          aria-current="page"
+          href="/games/suggestion"
+        >
+          Управление заявками
+        </a>
+        {% if is_owner %}
+        <a
+          class="btn btn-success mt-1"
+          aria-current="page"
+          href="/users/manage"
+        >
+          Управление пользователями
+        </a>
+        {% endif %} {% endif %}
+      </div>
     </div>
 
     {% block content %} {% endblock %}
