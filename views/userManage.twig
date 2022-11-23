@@ -6,34 +6,39 @@
   {% if message %}
   <div class="alert alert-info">
     {{ message }}
+    {% if message != 'Нельзя удалить владельца' %}
     <a href="/users/manage">Обновить список</a>
+    {% endif %}
   </div>
   {% endif %}
 
   <table
     class="table table-bordered table-striped table-info"
-    style="text-align: center; width:100%"
+    style="text-align: center; width: 100%"
   >
     <thead>
       <tr>
-        <th style="width:5%" scope="col">id</th>
+        <th style="width: 5%" scope="col">id</th>
         <th scope="col">Логин</th>
         <th scope="col">Роль</th>
-        <th style="width:15%" scope="col">Изменить роль</th>
+        <th style="width: 15%" scope="col">Изменить роль</th>
+        <th style="width: 15%" scope="col">Удалить</th>
       </tr>
     </thead>
     <tbody>
       {% for user in users%}
       <tr>
         <th scope="row">{{ user.id }}</th>
-					<form enctype="multipart/form-data" method="POST">
-						<td>{{ user.login }}</td>
-						<input type="hidden" value="{{user.login}}">
-						<td>{{ user.type }}</td>
-						<td>
+        <td>{{ user.login }}</td>
+        <td>{{ user.type }}</td>
+        <td>
+          <form enctype="multipart/form-data" method="POST">
             <button type="sumbit" class="btn btn-info">Изменить роль</button>
-						<input name="login" type="hidden" value="{{user.login}}">
+            <input name="login" type="hidden" value="{{ user.login }}" />
           </form>
+        </td>
+        <td>
+          <a class="btn btn-info" href="?id={{ user.id }}">Удалить</a>
         </td>
       </tr>
       {% endfor %}

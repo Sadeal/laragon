@@ -15,7 +15,26 @@ class UserManageController extends BaseGamesTwigController
 		$query->execute();
 		$context['users'] = $query->fetchAll();
 
+		$id = isset($_GET['id']) ? $_GET['id'] : '';
+		if ($id != '') {
+			if ($id != '1') {
+				$query = $this->pdo->prepare("DELETE FROM users WHERE id = :id");
+				$query->bindValue("id", $id);
+				$query->execute();
+				header("Location: /users/manage");
+				exit;
+			} else {
+				$context['message'] = 'Нельзя удалить владельца';
+			}
+		}
+
 		return $context;
+	}
+
+	public function get(array $context)
+	{
+		$context['title'] = "Добавить тип";
+		parent::get($context);
 	}
 
 	public function post(array $context)
@@ -50,8 +69,6 @@ EOL;
 		$query->bindValue("login", $login);
 		$query->bindValue("type", $type);
 		$query->execute();
-
-		$context['message'] = 'Вы успешно обновили данные о пользователе' . $login;
 
 		header("Location: /users/manage");
 		exit;
