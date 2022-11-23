@@ -32,6 +32,8 @@ class TwigBaseController extends BaseController
         $context['types'] = $typesQuery->fetchAll();
         $context['is_admin'] = $_SESSION['is_logged_admin'];
         $context['is_owner'] = $_SESSION['is_logged_owner'];
+        $context['user_login'] = $_SESSION['user_login'];
+
         return $context;
     }
 

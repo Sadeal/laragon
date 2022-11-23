@@ -73,11 +73,6 @@
                 </a>
               </div>
             </div>
-            <li class="nav-item">
-              <a class="btn btn-outline-dark" type="submit" href="/search">
-                Поиск
-              </a>
-            </li>
           </ul>
         </div>
         {% if is_admin %}
@@ -107,6 +102,14 @@
           </div>
         </div>
         {% endif %}
+        <a
+          class="btn btn-outline-dark"
+          type="submit"
+          href="/search"
+          style="margin-right: 5px"
+        >
+          Поиск
+        </a>
         <button
           class="navbar-toggler"
           type="button"
@@ -120,14 +123,24 @@
           <span class="navbar-toggler-icon"></span>
         </button>
 
-        <a
-          class="btn btn-danger"
-          aria-current="page"
-          href="/login"
-          style="margin-left: 5px; list-style: none"
-        >
-          Выйти
-        </a>
+        <div class="dropdown show" style="margin-right: 5px">
+          <a
+            class="btn dropdown-toggle btn-info"
+            href="#"
+            role="button"
+            id="dropdownUserLink"
+            data-bs-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            {{ user_login }}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="dropdownUserLink">
+            <a class="dropdown-item" href="#"> Maybe :) </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/login"> Выйти </a>
+          </div>
+        </div>
       </div>
     </nav>
     <div
@@ -147,10 +160,6 @@
           {{ type.typeRu }}
         </a>
         {% endfor %}
-        <br />
-        <a class="btn btn-outline-dark mt-1" aria-current="page" href="/search">
-          Поиск
-        </a>
       </div>
     </div>
 

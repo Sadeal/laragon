@@ -11,6 +11,7 @@ class AuthController extends BaseGamesTwigController
 		$context = parent::getContext();
 		$_SESSION['is_logged'] = false;
 		$_SESSION['is_logged_admin'] = false;
+		$_SESSION['user_login'] = '-';
 		return $context;
 	}
 
@@ -53,6 +54,7 @@ EOL;
 						}
 					}
 					$context['message'] = null;
+					$_SESSION['user_login'] = $login;
 					header("Location: /");
 				} else {
 					$context['message'] = 'Неверный логин и/или пароль';
