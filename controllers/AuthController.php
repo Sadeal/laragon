@@ -57,6 +57,9 @@ EOL;
 					$_SESSION['user_login'] = $login;
 					header("Location: /");
 				} else {
+					$_SESSION['is_logged'] = false;
+					$_SESSION['is_logged_admin'] = false;
+					$_SESSION['is_logged_owner'] = false;
 					$context['message'] = 'Неверный логин и/или пароль';
 				}
 			}

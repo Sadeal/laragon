@@ -23,12 +23,20 @@ class ObjectController extends BaseGamesTwigController
 		}
 
 		$data = $query->fetch();
+		if (!$data) {
+			header('Location: /');
+			exit;
+		}
 
 		$context['title'] = $data['ruName'];
 		$context['urlTitle'] = $data['title'];
 		$context['info'] = $data['info'];
 		$context['image'] = $data['image'];
 		$context['object'] = $data;
+		if ($data['status'] == 'pending' && $_SESSION['user_login'] != $data['suggest']) {
+			header('Location: /');
+			exit;
+		}
 
 
 		return $context;

@@ -15,6 +15,7 @@ require_once "../controllers/GamesDeleteController.php";
 require_once "../controllers/GamesDeleteSuggestionController.php";
 require_once "../controllers/TypeCreateController.php";
 require_once "../controllers/UserManageController.php";
+require_once "../controllers/SuggestedByUserController.php";
 require_once "../middleware/LoginRequiredMiddleware.php";
 require_once "../middleware/LoginRequiredAdminMiddleware.php";
 require_once "../middleware/LoginRequiredOwnerMiddleware.php";
@@ -41,6 +42,8 @@ $router->add("/", MainController::class)
 $router->add("/games/(?P<id>\d+)", ObjectController::class)
     ->middleware(new LoginRequiredMiddleware());
 $router->add("/search", SearchController::class)
+    ->middleware(new LoginRequiredMiddleware());
+$router->add("/suggested", SuggestedByUserController::class)
     ->middleware(new LoginRequiredMiddleware());
 $router->add("/games/suggestion", GameSuggestController::class)
     ->middleware(new LoginRequiredMiddleware());

@@ -30,8 +30,8 @@ class GamesCreateController extends BaseGamesTwigController
 		$image_url = "/images/$name";
 
 		$sql = <<<EOL
-INSERT INTO games (title, ruName, image, type, typeRu, info)
-VALUES (:title, :ruName, :image_url, :type, :typeRu, :info)
+INSERT INTO games (title, ruName, image, type, typeRu, info, status, suggest)
+VALUES (:title, :ruName, :image_url, :type, :typeRu, :info, 'accepted', 'ADDED BY ADMIN')
 EOL;
 
 		$query = $this->pdo->prepare($sql);

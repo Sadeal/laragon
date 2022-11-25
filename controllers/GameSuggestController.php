@@ -28,10 +28,11 @@ class GameSuggestController extends BaseGamesTwigController
 		$name =  $_FILES['image']['name'];
 		move_uploaded_file($tmp_name, "../public/images/$name");
 		$image_url = "/images/$name";
+		$suggest = $_SESSION['user_login'];
 
 		$sql = <<<EOL
-INSERT INTO suggestion (title, ruName, image, type, typeRu, info)
-VALUES (:title, :ruName, :image_url, :type, :typeRu, :info)
+INSERT INTO games (title, ruName, image, type, typeRu, info, status, suggest)
+VALUES (:title, :ruName, :image_url, :type, :typeRu, :info, 'pending', :suggest)
 EOL;
 
 		$query = $this->pdo->prepare($sql);
@@ -41,6 +42,7 @@ EOL;
 		$query->bindValue("image_url", $image_url);
 		$query->bindValue("typeRu", $typeRu);
 		$query->bindValue("info", $info);
+		$query->bindValue("suggest", $suggest);
 
 		$query->execute();
 

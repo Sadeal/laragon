@@ -1,6 +1,6 @@
-{% extends "__layout.twig" %} {% block content %}
+{% extends "__layout.twig" %} {% block content %} {% if suggestions %}
 <div
-  class="container d-flex flex-direction-column"
+  class="container d-flex flex-column"
   style="flex-wrap: wrap; width: max-content"
 >
   {% for object in suggestions %}
@@ -22,24 +22,6 @@
         margin-top: 15px;
       "
     >
-      {% if is_admin %}
-      <div class="position-absolute vis d-flex" style="right: 4px; top: 4px">
-        <form method="POST" style="margin-right: 5px">
-          <input name="id" type="hidden" value="{{ object.id }}" />
-          <button type="sumbit" class="btn btn-outline-success">
-            <i class="fas fa-check"></i>
-          </button>
-        </form>
-        <form
-          action="/games/suggestion/decision/{{ object.id }}/delete"
-          method="POST"
-        >
-          <button type="sumbit" class="btn btn-outline-danger">
-            <i class="fas fa-times" style="width: 15px"></i>
-          </button>
-        </form>
-      </div>
-      {% endif %}
       <img
         src="{{ object.image }}"
         style="
@@ -105,35 +87,16 @@
         Картинка<br />
         {{ object.image }}
       </a>
-      <a
-        class="btn btn-secondary"
-        href="#"
-        style="
-          margin-top: 10px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          text-align: center;
-          word-wrap: break-word;
-        "
-      >
-        Предложил:<br />
-        {{ object.suggest }}
-      </a>
     </div>
   </div>
-  {% endfor %}
 </div>
-
-<style>
-  .vis {
-    transition: 0.5s;
-    opacity: 0;
-  }
-
-  .vis:hover {
-    transition: 1s;
-    opacity: 1;
-  }
-</style>
-{% endblock %}
+{% endfor %} {% else %}
+<div
+  class="container d-flex flex-column justify-content-center"
+  style="flex-wrap: wrap; width: max-content; height: calc(100vh - 120px)"
+>
+  <span class="text-center justify-content-center align-items-center"
+    >Вы пока ничего не предложили :(</span
+  >
+</div>
+{% endif %} {% endblock %}

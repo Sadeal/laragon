@@ -10,7 +10,7 @@ class GameSuggestDecisionController extends BaseGamesTwigController
 	{
 		$context = parent::getContext();
 
-		$query = $this->pdo->query("SELECT * FROM suggestion");
+		$query = $this->pdo->query("SELECT * FROM games WHERE status = 'pending'");
 		$context['suggestions'] = $query->fetchAll();
 
 		return $context;
@@ -20,8 +20,8 @@ class GameSuggestDecisionController extends BaseGamesTwigController
 	{
 		$id = $_POST['id'];
 		$sql = <<<EOL
-SELECT *
-FROM suggestion
+UPDATE games
+SET status = 'accepted'
 WHERE id = :id
 EOL;
 
@@ -29,36 +29,39 @@ EOL;
 		$query->bindValue("id", $id);
 		$query->execute();
 
-		$data = $query->fetch();
+		// 		$data = $query->fetch();
 
-		$title = $data['title'];
-		$image = $data['image'];
-		$ruName = $data['ruName'];
-		$type = $data['type'];
-		$typeRu = $data['typeRu'];
-		$info = $data['info'];
+		// 		$title = $data['title'];
+		// 		$image = $data['image'];
+		// 		$ruName = $data['ruName'];
+		// 		$type = $data['type'];
+		// 		$typeRu = $data['typeRu'];
+		// 		$info = $data['info'];
 
-		$sql = <<<EOL
-INSERT INTO games (title, ruName, image, type, typeRu, info)
-VALUES (:title, :ruName, :image, :type, :typeRu, :info)
-EOL;
+		// 		$sql = <<<EOL
+		// UPDATE games
+		// SET status = 'accepted'
+		// WHERE id=:id
+		// INSERT INTO games (title, ruName, image, type, typeRu, info)
+		// VALUES (:title, :ruName, :image, :type, :typeRu, :info)
+		// EOL;
 
-		$query = $this->pdo->prepare($sql);
-		$query->bindValue("title", $title);
-		$query->bindValue("ruName", $ruName);
-		$query->bindValue("type", $type);
-		$query->bindValue("image", $image);
-		$query->bindValue("typeRu", $typeRu);
-		$query->bindValue("info", $info);
-		$query->execute();
+		// 		$query = $this->pdo->prepare($sql);
+		// 		$query->bindValue("title", $title);
+		// 		$query->bindValue("ruName", $ruName);
+		// 		$query->bindValue("type", $type);
+		// 		$query->bindValue("image", $image);
+		// 		$query->bindValue("typeRu", $typeRu);
+		// 		$query->bindValue("info", $info);
+		// 		$query->execute();
 
-		$sql = <<<EOL
-DELETE FROM suggestion
-WHERE id = :id
-EOL;
-		$query = $this->pdo->prepare($sql);
-		$query->bindValue("id", $id);
-		$query->execute();
+		// 		$sql = <<<EOL
+		// DELETE FROM suggestion
+		// WHERE id = :id
+		// EOL;
+		// 		$query = $this->pdo->prepare($sql);
+		// 		$query->bindValue("id", $id);
+		// 		$query->execute();
 
 		header("Location: /games/suggestion/decision");
 		exit;

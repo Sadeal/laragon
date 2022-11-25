@@ -11,11 +11,11 @@ class MainController extends BaseGamesTwigController
         $context = parent::getContext();
 
         if (isset($_GET['type'])) {
-            $query = $this->pdo->prepare("SELECT * FROM games WHERE type = :type");
+            $query = $this->pdo->prepare("SELECT * FROM games WHERE type = :type AND status = 'accepted'");
             $query->bindValue("type", $_GET['type']);
             $query->execute();
         } else {
-            $query = $this->pdo->query("SELECT * FROM games");
+            $query = $this->pdo->query("SELECT * FROM games WHERE status = 'accepted'");
         }
         $context['games'] = $query->fetchAll();
 

@@ -7,7 +7,7 @@ class GamesDeleteSuggestionController extends BaseController
 		$id = $this->params['id'];
 
 		$sql = <<<EOL
-DELETE FROM suggestion WHERE id = :id
+DELETE FROM games WHERE id = :id
 EOL;
 
 		$query = $this->pdo->prepare($sql);
